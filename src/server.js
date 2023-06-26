@@ -17,26 +17,24 @@ const authRoutes = require('./auth/routes.js');
 const v1Routes = require('./routes/v1.js');
 const v2Routes = require('./routes/v2.js');
 
-app.use(authRoutes);
-app.use(v1Routes);
-app.use(v2Routes);
-
-
-app.use(logger);
-app.use(notFoundHandler);
-app.use(errorHandler);
-app.use(authRoutes);
-app.use(v1Routes);
-app.use(v2Routes);
-
-
-app.use('*', notFoundHandler);
-app.use(errorHandler);
 
 app.get('/', welcomeHandler);
 function welcomeHandler(req, res) {
     res.status(200).send('hi');
 }
+app.use(authRoutes);
+app.use(v1Routes);
+app.use(v2Routes);
+app.use(logger);
+app.use(notFoundHandler);
+app.use(errorHandler);
+
+
+
+app.use('*', notFoundHandler);
+app.use(errorHandler);
+
+
 
 module.exports = {
   server: app, 
